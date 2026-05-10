@@ -1,0 +1,33 @@
+name: nashville-analytics
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - r-base=4.4
+  - r-tidyverse
+  - r-dbi
+  - r-rmariadb
+  - r-janitor
+  - r-skimr
+  - r-corrplot
+  - r-scales
+  - r-glmnet
+  - r-randomforest
+  - r-caret
+  - r-broom
+  - r-ggrepel
+  - r-patchwork
+  - r-car
+  - r-lmtest
+  - r-sf
+  - jupyter
+  - ipykernel
+  - r-irkernel
+  - pip
+  - pip:
+    - python-dotenv
+    - pandas
+    - sqlalchemy
+    - pymysql
+    - requests

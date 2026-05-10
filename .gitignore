@@ -1,0 +1,30 @@
+# Raw data — never committed. Too large and contains source files that must stay unmodified.
+data/raw/
+data/processed/
+
+# Environment and credentials
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# macOS system files
+.DS_Store
+
+# Conda
+*.conda
+
+# Reports — generated outputs, not source code
+reports/*.xlsx
+reports/*.pdf
+reports/*.csv
+reports/charts/
