@@ -29,7 +29,7 @@ dependencies:
     - python-dotenv
     - pandas
     - sqlalchemy
-    - pymysql
+    - mysql-connector-python
     - requests
     - matplotlib
     - seaborn
