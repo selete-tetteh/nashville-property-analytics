@@ -31,3 +31,12 @@ dependencies:
     - sqlalchemy
     - pymysql
     - requests
+    - matplotlib
+    - seaborn
+    - scipy
+    - numpy
+    - openpyxl
+    - prophet
+    - scikit-learn
+    - geopandas
+    - ipywidgets
