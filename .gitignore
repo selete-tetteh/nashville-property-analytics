@@ -25,6 +25,7 @@ __pycache__/
 
 # Reports — generated outputs, not source code
 reports/*.xlsx
+!reports/nashville_executive_summary.xlsx
 reports/*.pdf
 reports/*.csv
 reports/charts/
