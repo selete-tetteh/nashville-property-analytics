@@ -22,6 +22,28 @@ Four models were built on the 46% of records with complete assessment-side field
 
 ---
 
+## Power BI executive dashboard
+
+Notebooks work if someone's willing to read code. Not everyone is. The dashboard covers the same ground as Notebooks 02 through 04, four pages built in Power BI Desktop, for anyone who wants the findings without opening a single `.ipynb`.
+
+**Why a static CSV extract instead of a live MySQL connection.** Power BI Desktop is Windows-only, so it runs through Parallels on this machine. A live connection from inside that Windows VM back into the Mac's MySQL instance would add networking complexity that has nothing to do with the analysis, and it's the kind of setup that tends to break on a machine other than the one it was built on. Three CSVs are exported instead, using `sql/05_dashboard_extract.sql` and `src/export_dashboard_data.py`. Re-running the export script refreshes the dashboard if the underlying data changes. Less live, more reproducible.
+
+**The four pages:**
+
+- **Overview** — KPI cards and trend lines across all 56,468 transactions, filterable by sale year. The 54% structural null rate on assessment-side fields is noted directly on the KPI cards, so the numbers don't look wrong to someone filtering by those fields.
+- **Market Trends** — Real price and growth by tax district and year, same 56,468-row base as Overview.
+- **Mis-valuation** — Scoped to the 4,632-row held-out test set from Notebook 03's Random Forest model, not the full dataset. These are the properties the model never saw during training, which is the only reason its predictions on them mean anything. Including training-set predictions here would make the model look more accurate than it is. 90 records cross the mis-valuation threshold (51 overvalued, 39 undervalued), 75 of them in the Urban Services District.
+- **Neighbourhood Equity** — Appreciation and vacancy by income quintile, built from the 43,819 geocoded and demographic-enriched records from Notebook 04.
+
+![Overview page](reports/powerbi/screenshots/01_overview.png)
+![Market Trends page](reports/powerbi/screenshots/02_market_trends.png)
+![Mis-valuation page](reports/powerbi/screenshots/03_misvaluation.png)
+![Neighbourhood Equity page](reports/powerbi/screenshots/04_neighbourhood_equity.png)
+
+The interactive file is `reports/powerbi/Nashville_exec_dash.pbix`. GitHub can't render it inline, so it needs Power BI Desktop to open. The screenshots above are there for anyone browsing the repo without Power BI installed.
+
+---
+
 ## Repository structure
 
 ```
@@ -33,16 +55,29 @@ nashville-property-analytics/
 │   ├── 01_schema.sql
 │   ├── 02_cleaning_queries.sql
 │   ├── 03_analytical_queries.sql
-│   └── 04_analytical_queries.sql
+│   ├── 04_analytical_queries.sql
+│   └── 05_dashboard_extract.sql
 ├── notebooks/
 │   ├── 01_data_audit.ipynb
 │   ├── 02_exploratory_analysis.ipynb
 │   ├── 03_modelling.ipynb
 │   └── 04_census_enrichment.ipynb
 ├── src/
-│   └── load_raw.py
+│   ├── load_raw.py
+│   └── export_dashboard_data.py
 ├── reports/
-│   └── fig01–fig16 (PNG charts from all four notebooks)
+│   ├── fig01–fig16 (PNG charts from all four notebooks)
+│   ├── nashville_executive_summary.xlsx
+│   └── powerbi/
+│       ├── Nashville_exec_dash.pbix
+│       ├── overview_trends.csv
+│       ├── misvaluation.csv
+│       ├── neighbourhood_equity.csv
+│       └── screenshots/
+│           ├── 01_overview.png
+│           ├── 02_market_trends.png
+│           ├── 03_misvaluation.png
+│           └── 04_neighbourhood_equity.png
 ├── environment.yml
 └── README.md
 ```
